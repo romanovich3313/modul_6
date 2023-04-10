@@ -22,12 +22,10 @@ def handle_other(filename: Path, target_folder: Path) -> None:
 
 def handle_arhive(filename: Path, target_folder: Path) -> None:
     target_folder.mkdir(exist_ok=True, parents=True)
-    folder_for_file = target_folder / \
-        normalize(filename.name.replace(filename.suffix, ''))
+    folder_for_file = target_folder / normalize(filename.name.replace(filename.suffix, ''))
     folder_for_file.mkdir(exist_ok=True, parents=True)
     try:
-        shutil.unpack_archive(str(filename.resolve()),
-                              str(folder_for_file.resolve()))
+        shutil.unpack_archive(str(filename.resolve()), str(folder_for_file.resolve()))
     except shutil.ReadError:
         folder_for_file.rmdir()
         return None
